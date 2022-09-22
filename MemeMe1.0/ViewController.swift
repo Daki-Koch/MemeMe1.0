@@ -16,13 +16,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolbar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
+    var activeTextField = UITextField()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
-        
 
         configureText(textField: bottomTextField, text: "BOTTOM")
         configureText(textField: topTextField, text: "TOP")
@@ -83,7 +82,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func getKeyboardHeight(_ notification: Notification) -> CGFloat{
         let userInfo = notification.userInfo
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
-        return keyboardSize.cgRectValue.height
+        if (keyboardSize.cgRectValue.height < activeTextField.frame.origin.y){
+            
+            return keyboardSize.cgRectValue.height
+        }
+        else {
+            return .zero
+        }
     }
     func subscribeToKeyboardNotifications() {
         
@@ -143,26 +148,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return true
         
     }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.activeTextField = textField
+    }
+    @objc func textFieldIsDragged(_ gesture: UIPanGestureRecognizer){
+
+        let loc = gesture.location(in: self.view)
+        self.activeTextField.center = loc
+
+
+    }
+    
+    func configureText(textField: UITextField, text: String){
+        
+        // Alows user to drag Text Field to a desired location once edited.
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(textFieldIsDragged))
+        textField.addGestureRecognizer(gesture)
+        textField.isUserInteractionEnabled = true
+        textField.autocapitalizationType = .allCharacters
+        textField.text = text
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.textAlignment = .center
+        
+    }
 }
 
-func configureText(textField: UITextField, text: String){
-    
-    textField.autocapitalizationType = .allCharacters
-    textField.text = text
-    textField.defaultTextAttributes = memeTextAttributes
-    textField.defaultTextAttributes = memeTextAttributes
-    textField.textAlignment = .center
-    
-}
+
 
 
 
 let memeTextAttributes: [NSAttributedString.Key: Any] = [
     
     NSAttributedString.Key.foregroundColor: UIColor.white,
-    //NSAttributedString.Key.strokeColor: UIColor.black,
+    NSAttributedString.Key.strokeColor: UIColor.black,
     NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    //NSAttributedString.Key.strokeWidth: 3,
+    NSAttributedString.Key.strokeWidth: -3,
 
     
 ]
