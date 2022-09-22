@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
@@ -26,8 +26,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         configureText(textField: bottomTextField, text: "BOTTOM")
         configureText(textField: topTextField, text: "TOP")
 
-        
-        cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        #if targetEnvironment(simulator)
+        cameraButton.isEnabled = false;
+        #else
+        cameraButton.isEnabled = true;
+        #endif
         
         if imagePickerView.image != nil {
             shareButton.isEnabled = true
@@ -48,18 +51,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     @IBAction func pickAnImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        pickImage(.photoLibrary)
         
     }
     @IBAction func pickAnImageFromCamera(_ sender: Any) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
+        pickImage(.camera)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
@@ -67,6 +63,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             shareButton.isEnabled = true
             picker.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    func pickImage(_ sourceType: UIImagePickerController.SourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
@@ -105,10 +108,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func share(_ sender: Any) {
         let memedImage = generateMemedImage()
         let activityVC = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
-        present(activityVC, animated: true) {
-            self.save()
+        activityVC.completionWithItemsHandler = { (activity, completed, items, error) in
+            if (completed) {
+                self.save()
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-
+        self.present(activityVC, animated: true)
         
         
     }
@@ -175,24 +181,4 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 }
 
 
-
-
-
-let memeTextAttributes: [NSAttributedString.Key: Any] = [
-    
-    NSAttributedString.Key.foregroundColor: UIColor.white,
-    NSAttributedString.Key.strokeColor: UIColor.black,
-    NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSAttributedString.Key.strokeWidth: -3,
-
-    
-]
-
-
-struct Meme {
-    var topText: String
-    var bottomText: String
-    var originalImage: UIImage
-    var memedImage: UIImage
-}
 
