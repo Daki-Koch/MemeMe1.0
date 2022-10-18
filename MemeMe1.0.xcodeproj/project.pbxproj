@@ -15,6 +15,9 @@
 		637425E728D3604300AA6933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 637425E528D3604300AA6933 /* LaunchScreen.storyboard */; };
 		63CCB35528DC6A3100F14B72 /* impact.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63CCB35428DC6A3100F14B72 /* impact.ttf */; };
 		63CCB35728DC6A6E00F14B72 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CCB35628DC6A6E00F14B72 /* Meme.swift */; };
+		63F8B11028FD8EB700E33E49 /* SentMemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8B10F28FD8EB700E33E49 /* SentMemeTableViewController.swift */; };
+		63F8B11328FEBFFC00E33E49 /* SentMemeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8B11228FEBFFC00E33E49 /* SentMemeCollectionViewController.swift */; };
+		63F8B11528FEC23D00E33E49 /* SentMemeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F8B11428FEC23D00E33E49 /* SentMemeCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		637425E828D3604300AA6933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63CCB35428DC6A3100F14B72 /* impact.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = impact.ttf; sourceTree = "<group>"; };
 		63CCB35628DC6A6E00F14B72 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
+		63F8B10F28FD8EB700E33E49 /* SentMemeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMemeTableViewController.swift; sourceTree = "<group>"; };
+		63F8B11228FEBFFC00E33E49 /* SentMemeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMemeCollectionViewController.swift; sourceTree = "<group>"; };
+		63F8B11428FEC23D00E33E49 /* SentMemeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMemeCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +66,10 @@
 		637425D928D3604100AA6933 /* MemeMe1.0 */ = {
 			isa = PBXGroup;
 			children = (
-				63CCB35628DC6A6E00F14B72 /* Meme.swift */,
+				63F8B11628FEC49F00E33E49 /* Model */,
 				637425DA28D3604100AA6933 /* AppDelegate.swift */,
 				637425DC28D3604100AA6933 /* SceneDelegate.swift */,
-				637425DE28D3604100AA6933 /* EditMemeViewController.swift */,
+				63F8B11128FD8F8B00E33E49 /* ViewController */,
 				637425E028D3604100AA6933 /* Main.storyboard */,
 				637425E328D3604300AA6933 /* Assets.xcassets */,
 				637425E528D3604300AA6933 /* LaunchScreen.storyboard */,
@@ -71,6 +77,25 @@
 				63CCB35428DC6A3100F14B72 /* impact.ttf */,
 			);
 			path = MemeMe1.0;
+			sourceTree = "<group>";
+		};
+		63F8B11128FD8F8B00E33E49 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				637425DE28D3604100AA6933 /* EditMemeViewController.swift */,
+				63F8B11228FEBFFC00E33E49 /* SentMemeCollectionViewController.swift */,
+				63F8B10F28FD8EB700E33E49 /* SentMemeTableViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		63F8B11628FEC49F00E33E49 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63CCB35628DC6A6E00F14B72 /* Meme.swift */,
+				63F8B11428FEC23D00E33E49 /* SentMemeCollectionCell.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +173,9 @@
 				637425DF28D3604100AA6933 /* EditMemeViewController.swift in Sources */,
 				63CCB35728DC6A6E00F14B72 /* Meme.swift in Sources */,
 				637425DB28D3604100AA6933 /* AppDelegate.swift in Sources */,
+				63F8B11028FD8EB700E33E49 /* SentMemeTableViewController.swift in Sources */,
+				63F8B11528FEC23D00E33E49 /* SentMemeCollectionCell.swift in Sources */,
+				63F8B11328FEBFFC00E33E49 /* SentMemeCollectionViewController.swift in Sources */,
 				637425DD28D3604100AA6933 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

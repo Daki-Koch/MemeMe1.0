@@ -112,6 +112,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             if (completed) {
                 self.save()
                 self.dismiss(animated: true, completion: nil)
+                
             }
         }
         self.present(activityVC, animated: true)
@@ -123,13 +124,20 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         configureText(textField: topTextField, text: "TOP")
         imagePickerView.image = nil
         shareButton.isEnabled = false
+        self.dismiss(animated: true)
     }
     
     func save() {
         
         // Create the meme
-        let memedImage = generateMemedImage()
-        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: memedImage)
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imagePickerView.image!, memedImage: generateMemedImage())
+        
+        // Add meme to array in App delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
+        
+        
         
     }
     
