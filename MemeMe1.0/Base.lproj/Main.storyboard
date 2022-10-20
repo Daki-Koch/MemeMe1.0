@@ -25,12 +25,18 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="jaC-0u-wQo"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="TOP" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5K8-kg-kSf">
                                 <rect key="frame" x="16" y="101" width="358" height="49.666666666666657"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="eAI-H1-P7W"/>
+                                </connections>
                             </textField>
                             <navigationBar clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eQ-Ha-N3k">
                                 <rect key="frame" x="0.0" y="47" width="390" height="44"/>

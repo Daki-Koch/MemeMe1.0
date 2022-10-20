@@ -40,6 +40,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Subscribe to the keyboard notifications, to allow the view to raise when necessary
@@ -94,6 +95,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
     }
     func subscribeToKeyboardNotifications() {
+        
+        
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardAppearance(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -165,19 +168,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.activeTextField = textField
     }
-    @objc func textFieldIsDragged(_ gesture: UIPanGestureRecognizer){
-
-        let loc = gesture.location(in: self.view)
-        self.activeTextField.center = loc
-
-
-    }
     
     func configureText(textField: UITextField, text: String){
         
         // Alows user to drag Text Field to a desired location once edited.
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(textFieldIsDragged))
-        textField.addGestureRecognizer(gesture)
         textField.isUserInteractionEnabled = true
         textField.autocapitalizationType = .allCharacters
         textField.text = text
